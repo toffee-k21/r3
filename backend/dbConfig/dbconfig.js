@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
 
-const connect =()=> mongoose.connect("mongodb://localhost:27017/rcube").then("mongo connected");
+mongoose.connect("mongodb://localhost:27017/rcube").then(console.log("mongoDb connected"));
 
-
-module.exports = connect

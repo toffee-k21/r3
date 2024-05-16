@@ -1,14 +1,17 @@
 const express = require("express");
 const userRouter = require("./routes/user");
-const connect = require("./dbConfig/dbconfig");
-
-connect().then("hello")
+const User = require("./models/user");
+require("./dbConfig/dbconfig");
 
 const app = express();
 
 app.use(express.json()); //middleware for form data
 
-app.get("/",(req,res)=>{
+app.get("/",async(req,res)=>{
+    // const user = await User.find(req.body);
+    // if(user){
+
+    // }
     res.send("hello");
 })
 
