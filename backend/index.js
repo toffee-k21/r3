@@ -1,18 +1,20 @@
 const express = require("express");
 const userRouter = require("./routes/user");
 const User = require("./models/user");
+const cors = require("cors")
 const jwt = require("jsonwebtoken")
 require("./dbConfig/dbconfig");
 const secretkey = "secretkey"; 
 
 const app = express();
+app.use(cors());
 
 app.use(express.json()); //middleware for form data
 
-app.get("/",verifyToken,(req,res)=>{
+app.get("/",(req,res)=>{
     res.send("hello");
 })
-
+//no req of middleware as it is not server side rendering
 function verifyToken(req,res,next){
 const token = req.headers.token;
 if(token){

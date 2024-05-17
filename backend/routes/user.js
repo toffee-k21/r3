@@ -29,15 +29,15 @@ userRouter.post("/signin", async(req, res) => {
   const check = await User.findOne(req.body);
   if(check){
 const token = jwt.sign(req.body, secretkey);
-// res.send(token);
-res.setHeader('Token',`bearer ${token}`);
+res.json({result:token});
+// res.setHeader('Token',`bearer ${token}`);
 // res.header = { 'Authentication':`bearer ${token}`}
-console.log(token)
+// console.log(token);
 // res.setHeader("Content-Type", "application/json");
   } else{
-res.send("invalid user credentials")
+res.send({result:"invalid user credentials"})
   }
-  res.redirect("/");
+  // res.redirect("/");
 
 });
 
