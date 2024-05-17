@@ -1,5 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
+const jwt = require("jsonwebtoken");
+const secretkey = "secretkey"; 
 
 const userRouter = express.Router();
 
@@ -26,11 +28,17 @@ userRouter.post("/signup", async (req, res) => {
 userRouter.post("/signin", async(req, res) => {
   const check = await User.findOne(req.body);
   if(check){
-res.redirect("/")
+const token = jwt.sign(req.body, secretkey);
+// res.send(token);
+res.setHeader('Token',`bearer ${token}`);
+// res.header = { 'Authentication':`bearer ${token}`}
+console.log(token)
+// res.setHeader("Content-Type", "application/json");
   } else{
 res.send("invalid user credentials")
   }
   res.redirect("/");
+
 });
 
 module.exports = userRouter;
