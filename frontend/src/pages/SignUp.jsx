@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export function SignUp() {
+  const navigate = useNavigate();
+  const [userName,setUserName] = useState('')
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const userAuth = async ()=>{
+const value = await fetch("http://localhost:5000/user/signup", {
+  method: "Post",
+  body: JSON.stringify({ userName: userName, email: email, password: password }),
+  headers: {
+    "Content-Type": "application/json", //headers pass krna jaroori hota hai
+  },
+});
+const data = await value.json();
+console.log(data);
+navigate("/signin");
+  }
+
+  useEffect(() => {
+    const accessToken = Cookies.get("access_token");
+    if (accessToken) {
+      navigate("/");
+    }
+  }, []);
   return (
     <section>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-          <div className="mb-2 flex justify-center">
-          </div>
+          <div className="mb-2 flex justify-center"></div>
           <h2 className="text-center text-2xl font-bold leading-tight text-black">
             Sign up to create account
           </h2>
@@ -38,6 +61,8 @@ export function SignUp() {
                     type="text"
                     placeholder="Full Name"
                     id="name"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
                   ></input>
                 </div>
               </div>
@@ -55,6 +80,8 @@ export function SignUp() {
                     type="email"
                     placeholder="Email"
                     id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   ></input>
                 </div>
               </div>
@@ -74,6 +101,8 @@ export function SignUp() {
                     type="password"
                     placeholder="Password"
                     id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   ></input>
                 </div>
               </div>
@@ -81,6 +110,7 @@ export function SignUp() {
                 <button
                   type="button"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                  onClick={userAuth}
                 >
                   Create Account
                 </button>

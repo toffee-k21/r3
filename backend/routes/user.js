@@ -7,10 +7,10 @@ const userRouter = express.Router();
 
 userRouter.post("/signup", async (req, res) => {
 
-  const check = await User.findOne(req.body.email);//findOne object ya null return krega but find array of objects ya empty array return krega
-  if (check) {
-    res.send("user Already exists");
-  } else {
+  // const check = await User.findOne(req.body.email);//findOne object ya null return krega but find array of objects ya empty array return krega
+  // if (check) {
+  //   res.send("user Already exists");
+  // } else {
     try {
       const data = await User.create({
         userName: req.body.userName,
@@ -18,12 +18,14 @@ userRouter.post("/signup", async (req, res) => {
         password: req.body.password,
       });
       console.log(data);
-      res.redirect("/");
+      // res.redirect("/");
+      res.send({result:"successfully created"});
     } catch (error) {
       console.log(error);
     }
   }
-});
+// }
+);
 
 userRouter.post("/signin", async(req, res) => {
   const check = await User.findOne(req.body);
@@ -35,7 +37,7 @@ res.json({result:token});
 // console.log(token);
 // res.setHeader("Content-Type", "application/json");
   } else{
-res.send({result:"invalid user credentials"})
+console.log("na")
   }
   // res.redirect("/");
 

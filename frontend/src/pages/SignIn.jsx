@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import React, { useEffect, useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
@@ -20,15 +20,22 @@ const userAuth = async()=>{
   });
   const data = await value.json();
   console.log(data)
-  // if(data){
-  //   Cookies.set("access_token", data.result);
-  // navigate("/");
-  // }
-  // else{
-  //   console.log("error")
-  // }
+  if(data){
+    Cookies.set("access_token", data.result);
+  navigate("/");
+  }
+  else{
+    console.log("invalid user credentials");
+  }
 
 }
+
+useEffect(()=>{
+const accessToken = Cookies.get("access_token");
+if(accessToken){
+  navigate("/");
+}
+},[])
 
   return (
     <section>
