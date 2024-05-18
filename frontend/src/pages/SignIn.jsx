@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useUserContext } from "../utils/UserContext";
 
 
 export function SignIn() {
@@ -22,6 +23,7 @@ const userAuth = async()=>{
   console.log(data)
   if(data){
     Cookies.set("access_token", data.result);
+    Cookies.set("userId", data.userId);
   navigate("/");
   }
   else{

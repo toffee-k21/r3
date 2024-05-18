@@ -28,10 +28,10 @@ userRouter.post("/signup", async (req, res) => {
 );
 
 userRouter.post("/signin", async(req, res) => {
-  const check = await User.findOne(req.body);
-  if(check){
+  const userVal = await User.findOne(req.body);
+  if(userVal){
 const token = jwt.sign(req.body, secretkey);
-res.json({result:token});
+res.json({result:token, userId:userVal._id});
 // res.setHeader('Token',`bearer ${token}`);
 // res.header = { 'Authentication':`bearer ${token}`}
 // console.log(token);
