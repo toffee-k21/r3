@@ -15,9 +15,9 @@ const addItem = await Item.create({
   location: req.body.location,
   userId: req.body.userId,
 });
-const result = addItem
+// const result = addItem
 console.log(addItem);
-res.end();
+if (addItem) res.send({ result: "Successfully added !" });
 });
 
 module.exports = ItemRouter;
