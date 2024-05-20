@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './utils/UserContext';
+import { SocketProvider } from './utils/SocketContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <UserProvider>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <SocketProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </SocketProvider>
   </UserProvider>
 );
 

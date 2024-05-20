@@ -3,7 +3,11 @@ const Item = require("../models/Item");
 const ItemRouter = express.Router();
 
 ItemRouter.get("/",(req,res)=>{
-res.send("hello")
+res.send("hello");
+});
+ItemRouter.get("/view",async(req,res)=>{
+const allItems = await Item.find({}); 
+res.send(allItems);
 });
 
 ItemRouter.post("/add",async(req,res)=>{

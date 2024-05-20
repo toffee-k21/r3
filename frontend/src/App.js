@@ -15,6 +15,8 @@ import Home from "./pages/Home";
 import Reuse from "./pages/Reuse";
 import AddItem from "./pages/AddItem";
 import NavBar from "./components/NavBar";
+import Offer from "./components/Offer";
+import ChatList from "./pages/ChatList";
 
 function App() {
   return (
@@ -24,10 +26,13 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/reuse" element={<Reuse />} />
+          <Route path="/additem" element={<AddItem />} />
+          <Route path="/reuse" element={<Reuse />} />
+          <Route path="/chat" element={<ChatList />} />
+          <Route path="/reuse/:id" element={<Offer />} />
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/additem" element={<AddItem />} />
       </Routes>
     </BrowserRouter>
   );
