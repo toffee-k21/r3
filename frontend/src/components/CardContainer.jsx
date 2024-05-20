@@ -15,7 +15,7 @@ const CardContainer = () => {
         getItems();
       }, []);
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center items-center flex-wrap'>
       {ItemsList.map((r)=>{
         return <div className='m-5'><ItemCard details={r}/></div>
       })}

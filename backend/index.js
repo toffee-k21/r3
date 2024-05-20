@@ -55,13 +55,19 @@ io.on("connection", (socket) => {
     socket.to(data.to).emit("room-entry", room); //sending room id
     // socket.to(room).emit("hello");
   });
+    socket.on("hello",(data)=>{
+console.log(data)
+    })
+
   socket.on("check-req", (user) => {
-    console.log("cheking /user",user);
+    console.log("cheking /user", user);
     socket.join(user); //joining and accepting room id
+  });
     socket.on("room-entry", (room)=>{
 console.log(room)
+socket.to(user).emit("hello","hello");
     });
-  });
+
   // socket.on("room-entry", (room) => {
   //   console.log(room);
   // });

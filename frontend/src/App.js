@@ -17,6 +17,7 @@ import AddItem from "./pages/AddItem";
 import NavBar from "./components/NavBar";
 import Offer from "./components/Offer";
 import ChatList from "./pages/ChatList";
+import ObjectDetection from "./components/ObjectDetection";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/reuse" element={<Reuse />} />
           <Route path="/chat" element={<ChatList />} />
           <Route path="/reuse/:id" element={<Offer />} />
+          <Route path="/img-detect" element={<ObjectDetection />} />
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
