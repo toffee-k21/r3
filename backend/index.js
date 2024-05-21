@@ -14,6 +14,8 @@ const io = new Server({
   cors: true,
 });
 
+const socketIds = new Map();
+
 app.use(express.json()); //middleware for form data
 
 app.get("/", (req, res) => {
@@ -45,36 +47,29 @@ app.listen(5000, () => {
 //connection is reserved
 io.on("connection", (socket) => {
   console.log("new connection");
-  console.log(socket);
-  socket.on("trade-call", (data) => {
-    console.log(data);
-    // const { data } = data
-    const room = `${data.from} ${data.to}`;
-    // socket.join(room);
-    socket.join(data.to);
-    socket.to(data.to).emit("room-entry", room); //sending room id
-    // socket.to(room).emit("hello");
+  // console.log(socket);
+  socket.on("registerUser",(data)=>{
+    // console.log(data.userId);
+    socketIds.set(data.userId,socket.id);
   });
-    socket.on("hello",(data)=>{
-console.log(data)
-    })
+  socket.on("message-initialize", (data) => {
+    // socketIds.set(data.from);
+    //data=>touserid fromuserid message
+    const socketId = socketIds.get(data.to);
+    socket.to(socketId).emit("message",{data})
+
+
+  });
 
   socket.on("check-req", (user) => {
     console.log("cheking /user", user);
-    socket.join(user); //joining and accepting room id
   });
     socket.on("room-entry", (room)=>{
 console.log(room)
 socket.to(user).emit("hello","hello");
     });
 
-  // socket.on("room-entry", (room) => {
-  //   console.log(room);
-  // });
-  // socket.on("accept-trade", (data) => {
-  //   console.log(data);
-  // });
-  // socket.to().emit("")
+
 });
 
 io.listen(5001);

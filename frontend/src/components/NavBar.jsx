@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useUserContext } from '../utils/UserContext';
 import Cookies from "js-cookie";
 import { Link } from 'react-router-dom';
+import { useSocket } from '../utils/SocketContext';
 
 const NavBar = () => {
     const val = useUserContext();
@@ -10,6 +11,17 @@ const NavBar = () => {
     useEffect(()=>{
 val.setUserId(userId)
     },[])
+
+
+        const { socket } = useSocket();
+        socket.on("connect", () => {
+          socket.emit("registerUser", { userId: userId });
+        });
+
+          // const { socket } = useSocket();
+          socket.on("message", (data) => {
+            console.log(data);
+          });
 
   return (
     <div className="relative w-full bg-white">

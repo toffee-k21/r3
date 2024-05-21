@@ -36,7 +36,7 @@ const ObjectDetection = () => {
         <div>
           <h2>Detection Results</h2>
           {/* <pre>{JSON.stringify(results, null, 2)}</pre> */}
-          <div>{results}</div>
+          <div className="text-2xl font-bold">{results}</div>
         </div>
       )}
     </div>
