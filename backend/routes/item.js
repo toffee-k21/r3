@@ -1,10 +1,18 @@
 const express = require("express");
 const Item = require("../models/Item");
+const Chat = require("../models/Chat");
 const ItemRouter = express.Router();
 
 ItemRouter.get("/",(req,res)=>{
 res.send("hello");
 });
+
+ItemRouter.post("/", async (req, res) => {
+  // console.log(req.body.to, req.body.from);
+  const data = await Chat.find({ from: req.body.from });
+  res.send(data);
+});
+
 ItemRouter.get("/view",async(req,res)=>{
 const allItems = await Item.find({}); 
 res.send(allItems);

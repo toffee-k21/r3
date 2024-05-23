@@ -25,6 +25,22 @@ const Offer = () => {
       // socket.on("trade", (data) => {
       //   console.log(data);
       // });
+          useEffect(() => {
+            fetchMessage();
+          }, []);
+
+          const fetchMessage = async () => {
+            const result = await fetch("http://localhost:5000/item", {
+              method: "post",
+              body: JSON.stringify({ from: Appuser.userId, to: params.id }),
+              headers: {
+                "Content-Type": "Application/json",
+              },
+            });
+            const data = await result.json();
+            console.log("data hai bro",data);
+          };
+
   return (
     <div>
         message

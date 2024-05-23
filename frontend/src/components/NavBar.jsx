@@ -21,6 +21,7 @@ val.setUserId(userId)
           // const { socket } = useSocket();
           socket.on("message", (data) => {
             console.log(data);
+            
           });
 
   return (
