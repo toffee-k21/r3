@@ -45,7 +45,6 @@ app.use("/item", ItemRouter);
 
 app.use("/chat", chatRouter);
 
-
 // app.use("/chat", chatRouter)
 
 app.listen(5000, () => {
@@ -59,34 +58,26 @@ io.on("connection", (socket) => {
     // console.log(data.userId);
     socketIds.set(data.userId, socket.id);
   });
-  socket.on("message-initialize", async (data) => {
+  socket.on("initialize-message", async (data) => {
+    //msg buyer means buyer ne msg kiya
     // socketIds.set(data.from);
     //data=>touserid fromuserid message
+const value = await Chat.findOne({
+  from:data.from,
+  to:data.to
+})
+    if(value){
+      const enterData = await Chat.create(data);
+    }
+  });
+  
+  socket.on("message", async (data) => {
+    const enterData = await Chat.findOneAndUpdate(
+      { from: data.from, to: data.to },
+      { $push: { messages: data.message } }
+    );
     const socketId = socketIds.get(data.to);
     socket.to(socketId).emit("message", { data });
-    const enterData = await Chat.create(
-      {
-        from: data.from,
-        to: data.to,
-        messages: [],
-      },
-      // { $push: { messages: data.message } }
-    );
-    const updatemessage = await Chat.updateOne({
-      $push: { messages: data.message },
-    });
-    // const enterData = await Chat.updateOne(
-    //   {$push:{messages:data.message}}
-    // );
-    // res.end();
-  });
-
-  socket.on("check-req", (user) => {
-    console.log("cheking /user", user);
-  });
-  socket.on("room-entry", (room) => {
-    console.log(room);
-    socket.to(user).emit("hello", "hello");
   });
 });
 

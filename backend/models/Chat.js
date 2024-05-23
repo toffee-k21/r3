@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 
 const chatSchema = new mongoose.Schema({
   messages: [String], // An array of message objects
-  from: { type: String, required: true },
-  to: { type: String, required: true },
+  from: String,
+  to:  String,
   // time: { type: String }
 });
 

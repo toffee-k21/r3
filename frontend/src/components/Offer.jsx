@@ -16,7 +16,7 @@ const Offer = () => {
     const params = useParams();
     console.log("params",params.id);
     const fun = ()=>{
-      socket.emit("message-initialize", {
+      socket.emit("message", {
         from: Appuser.userId,
         to: params.id,
         message:message
@@ -25,8 +25,17 @@ const Offer = () => {
       // socket.on("trade", (data) => {
       //   console.log(data);
       // });
+const createInstance = (userId)=>{
+  socket.emit("initialize-message", {
+    from: Appuser.userId,
+    to: params.id,
+    message:[]
+  });
+}
+
           useEffect(() => {
             fetchMessage();
+            createInstance(params.id);
           }, []);
 
           const fetchMessage = async () => {
