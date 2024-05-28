@@ -6,6 +6,7 @@ import { useSocket } from '../utils/SocketContext';
 
 const NavBar = () => {
     const val = useUserContext();
+    // const { userId }= useUserContext()
     console.log(val)
     const userId = Cookies.get("userId");
     useEffect(()=>{
@@ -63,6 +64,7 @@ val.setUserId(userId)
             </li>
           </ul>
         </div>
+        <div>UserId: {userId}</div>
         <div className="hidden lg:block">
           <Link to="/chat">
             <button

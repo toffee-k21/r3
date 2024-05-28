@@ -8,9 +8,12 @@ require("./dbConfig/dbconfig");
 const secretkey = "secretkey";
 const { Server, Socket } = require("socket.io");
 const Chat = require("./models/Chat");
+const UploadRouter = require("./routes/upload");
 
 const app = express();
 app.use(cors());
+
+app.use(express.static("./uploads"));
 
 const io = new Server({
   cors: true,
@@ -38,12 +41,14 @@ function verifyToken(req, res, next) {
     res.send("token not available");
   }
 }
-
+app.use(express.urlencoded({extended:false}))
 app.use("/user", userRouter);
 
 app.use("/item", ItemRouter);
 
 app.use("/chat", chatRouter);
+
+app.use("/upload", UploadRouter);
 
 // app.use("/chat", chatRouter)
 
@@ -59,25 +64,23 @@ io.on("connection", (socket) => {
     socketIds.set(data.userId, socket.id);
   });
   socket.on("initialize-message", async (data) => {
-    //msg buyer means buyer ne msg kiya
-    // socketIds.set(data.from);
-    //data=>touserid fromuserid message
 const value = await Chat.findOne({
   from:data.from,
   to:data.to
 })
-    if(value){
+    if(!value){
       const enterData = await Chat.create(data);
     }
   });
   
   socket.on("message", async (data) => {
-    const enterData = await Chat.findOneAndUpdate(
-      { from: data.from, to: data.to },
-      { $push: { messages: data.message } }
-    );
     const socketId = socketIds.get(data.to);
     socket.to(socketId).emit("message", { data });
+    // const frm = data.from
+    const enterData = await Chat.findOneAndUpdate(
+      { from: data.from, to: data.to },
+      { $push: { messages: `${data.from} : ${data.message} `} }
+    );
   });
 });
 
