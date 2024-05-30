@@ -19,7 +19,7 @@ const io = new Server({
   cors: true,
 });
 
-const socketIds = new Map();
+const userIdToSocketIdMap = new Map();
 
 app.use(express.json()); //middleware for form data
 
@@ -41,7 +41,7 @@ function verifyToken(req, res, next) {
     res.send("token not available");
   }
 }
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }));
 app.use("/user", userRouter);
 
 app.use("/item", ItemRouter);
@@ -50,37 +50,45 @@ app.use("/chat", chatRouter);
 
 app.use("/upload", UploadRouter);
 
-// app.use("/chat", chatRouter)
-
 app.listen(5000, () => {
   console.log("server started");
 });
-//connection is reserved
 io.on("connection", (socket) => {
   console.log("new connection");
-  // console.log(socket);
+
   socket.on("registerUser", (data) => {
-    // console.log(data.userId);
-    socketIds.set(data.userId, socket.id);
+    userIdToSocketIdMap.set(data.userId, socket.id);
   });
-  socket.on("initialize-message", async (data) => {
-const value = await Chat.findOne({
-  from:data.from,
-  to:data.to
-})
-    if(!value){
-      const enterData = await Chat.create(data);
-    }
-  });
-  
+
   socket.on("message", async (data) => {
-    const socketId = socketIds.get(data.to);
-    socket.to(socketId).emit("message", { data });
-    // const frm = data.from
-    const enterData = await Chat.findOneAndUpdate(
-      { from: data.from, to: data.to },
-      { $push: { messages: `${data.from} : ${data.message} `} }
-    );
+    const socketId = userIdToSocketIdMap.get(data.to);
+    socket.to(socketId).emit("message", data);
+
+    const findInstance = await Chat.findOne({
+      $or: [
+        { from: data.from, to: data.to },
+        { from: data.to, to: data.from },
+      ],
+    });
+    console.log(findInstance);
+
+    if (findInstance) {
+      const enterData = await Chat.findOneAndUpdate(
+        {
+          $or: [
+            { from: data.from, to: data.to },
+            { from: data.to, to: data.from },
+          ],
+        },
+        { $push: { messages: `${data.from} : ${data.message} ` } }
+      );
+    } else {
+      const createInstance = await Chat.create({
+        from: data.from,
+        to: data.to,
+        messages: `${data.from} : ${data.message} `,
+      });
+    }
   });
 });
 
