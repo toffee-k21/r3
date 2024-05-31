@@ -13,16 +13,12 @@ const NavBar = () => {
 val.setUserId(userId)
     },[])
 
-
         const { socket } = useSocket();
         socket.on("connect", () => {
           socket.emit("registerUser", { userId: userId });
         });
 
-          // const { socket } = useSocket();
-          socket.on("message", (data) => {
-            console.log(data);
-          });
+        
 
   return (
     <div className="relative w-full bg-white">

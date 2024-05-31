@@ -22,6 +22,33 @@ const Message = () => {
     });
   };
 
+
+    useEffect(() => {
+      // const { message } = data;
+    // socket.on("message", (data) => {
+    //   console.log(data);
+    //   const { message } = data;
+    //   setMessageData((prev) => {
+    //     return [[...prev], message];
+    //   });
+    // });
+
+      const handleMessage = (data) => {
+        const {message} = data
+        setMessageData((prev) => [...prev, message]);
+      };
+
+      socket.on("message", handleMessage);
+
+      // Clean up the event listener on component unmount
+      return () => {
+        socket.off("message", handleMessage);
+      };
+    }, [socket]);
+    // socket.off("message");
+
+
+
   useEffect(() => {
     fetchMessage();
   }, []);
@@ -55,8 +82,8 @@ const Message = () => {
         <button onClick={sendMessage}>send</button>
       </div>
       <div>
-        {messageData?.map((r)=>{
-return <div>{r}</div>
+        {messageData?.map((r) => {
+          return <div>{r}</div>;
         })}
       </div>
     </div>
