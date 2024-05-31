@@ -32,9 +32,15 @@ const Chat = () => {
             <div>
               from: {r.from} - to : {r.to}
             </div>
-            <Link to={`/reuse/${r.from}`}>
-              <button>trade</button>
-            </Link>
+            {r.from == Appuser.userId ? (
+              <Link to={`/reuse/${r.to}`}>
+                <button>trade</button>
+              </Link>
+            ) : (
+              <Link to={`/reuse/${r.from}`}>
+                <button>trade</button>
+              </Link>
+            )}
           </div>
         );
       })}
