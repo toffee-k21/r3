@@ -62,7 +62,9 @@ io.on("connection", (socket) => {
 
   socket.on("message", async (data) => {
     const socketId = userIdToSocketIdMap.get(data.to);
+    const socketIdFrom = userIdToSocketIdMap.get(data.from);
     socket.to(socketId).emit("message", data);
+    // socket.to(socketIdFrom).emit("message", data);
 
     const findInstance = await Chat.findOne({
       $or: [

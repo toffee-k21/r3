@@ -20,6 +20,10 @@ const Message = () => {
       to: params.id,
       message: message,
     });
+    setMessageData((prev)=>{
+       const val = `${Appuser.userId} : ${message}`;
+      return [...prev, val]
+    })
   };
 
 
@@ -34,8 +38,10 @@ const Message = () => {
     // });
 
       const handleMessage = (data) => {
-        const {message} = data
-        setMessageData((prev) => [...prev, message]);
+        const {from, message} = data
+        console.log(from, message)
+        const val = `${from} : ${message}`
+        setMessageData((prev) => [...prev, val]);
       };
 
       socket.on("message", handleMessage);
