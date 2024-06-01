@@ -77,20 +77,31 @@ const Message = () => {
   };
 
   return (
-    <div>
-      <div>
-        message
+    <div className="">
+      <div
+        style={{ scrollbarWidth: "none" }}
+        className="w-1/2 h-screen overflow-auto"
+      >
+        {messageData?.map((r) => {
+          return (
+            <div className="p-2 m-2 bg-black text-white rounded-md">{r}</div>
+          );
+        })}
+      </div>
+      <div className="w-full m-auto fixed bottom-0 bg-gray-600">
         <input
           type="text"
+          placeholder="Enter Your Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          className="p-2 w-2/4 my-2"
         />
-        <button onClick={sendMessage}>send</button>
-      </div>
-      <div>
-        {messageData?.map((r) => {
-          return <div>{r}</div>;
-        })}
+        <button
+          className="m-2 rounded-md bg-black px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          onClick={sendMessage}
+        >
+          send
+        </button>
       </div>
     </div>
   );
