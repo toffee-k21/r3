@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useUserContext } from '../utils/UserContext';
+import Upload from '../components/Upload';
 //  itemName:String,
     // category:String,
     // priceForDay:Number,
@@ -15,6 +16,7 @@ const AddItem = () => {
       const [priceForDay,setPriceForDay] = useState('');
       const [desc,setDesc] = useState('');
       const [category, setCategory] = useState("others");
+      const [imgUrl, setImgUrl] = useState("please upload img url")
     //   const [userId,setUserId] = useState('');
 const user = useUserContext();
 const handleAdd = async( )=>{
@@ -28,6 +30,7 @@ const handleAdd = async( )=>{
         desc: desc,
         location: position,
         userId: user.userId,
+        imgUrl:imgUrl
       }),
       headers:{
         "Content-Type":"application/json"
@@ -49,10 +52,12 @@ useEffect(() => {
   }
 }, []);
 
+
   return (
     <div>
       Latitude: {position.latitude}, Longitude: {position.longitude}
       <div className="w-full md:w-1/3 m-4">
+        <Upload set={setImgUrl} />
         <input
           className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
           type="text"

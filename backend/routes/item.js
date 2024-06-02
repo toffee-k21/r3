@@ -14,6 +14,7 @@ ItemRouter.get("/view", async (req, res) => {
 
 ItemRouter.post("/add", async (req, res) => {
   const addItem = await Item.create({
+    imgUrl:req.body.imgUrl,
     itemName: req.body.itemName,
     category: req.body.category,
     priceForDay: req.body.priceForDay,

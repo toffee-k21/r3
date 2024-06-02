@@ -18,8 +18,8 @@ const upload = multer({ storage: storage });
 
 UploadRouter.post("/", upload.single("file"), (req, res) => {
   console.log(req.file);
-  console.log(req.file.mimetype.split("/").at(-1));
-  res.status(200).send("done");
+  // console.log(req.file.mimetype.split("/").at(-1));
+  res.status(200).json({result: "done"});
 });
 
 
