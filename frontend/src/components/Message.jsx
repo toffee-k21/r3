@@ -6,6 +6,7 @@ import { useUserContext } from "../utils/UserContext";
 const Message = () => {
   const [message, setMessage] = useState("");
   const [messageData, setMessageData] = useState([]);
+  // const [err,setErr] = useState(false);
 
   const Appuser = useUserContext();
   console.log(Appuser.userId);
@@ -22,20 +23,19 @@ const Message = () => {
     });
     setMessageData((prev)=>{
        const val = `${Appuser.userId} : ${message}`;
-      return [...prev, val]
+      try{
+        return [...prev, val]
+      } catch (err){
+        // console.log(err)
+        // setErr(true);
+        return [val]
+      }
     })
   };
 
+  // console.log(err);
 
     useEffect(() => {
-      // const { message } = data;
-    // socket.on("message", (data) => {
-    //   console.log(data);
-    //   const { message } = data;
-    //   setMessageData((prev) => {
-    //     return [[...prev], message];
-    //   });
-    // });
 
       const handleMessage = (data) => {
         const {from, message} = data
