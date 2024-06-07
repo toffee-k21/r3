@@ -5,9 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './utils/UserContext';
 import { SocketProvider } from './utils/SocketContext';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={appStore}>
   <UserProvider>
     <SocketProvider>
       <React.StrictMode>
@@ -15,6 +18,7 @@ root.render(
       </React.StrictMode>
     </SocketProvider>
   </UserProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

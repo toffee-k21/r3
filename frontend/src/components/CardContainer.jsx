@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { ItemCard } from './ItemCard';
+import useFetchItemList from '../utils/useFetchItemList';
+import { useSelector } from 'react-redux';
 
 const CardContainer = () => {
 
   const [ItemsList,setItemsList] = useState([]);
-      const getItems = async () => {
-        const result = await fetch("http://localhost:5000/item/view/");
-        const data = await result.json();
-        console.log(data);
-        setItemsList(data)
-      };
 
-      useEffect(() => {
-        getItems();
-      }, []);
+  const data = useSelector((state)=>state.item)
+  console.log(data)
+  
+// const data = useFetchItemList();
+// setItemsList(data);
+console.log(data);
   return (
     <div className='flex justify-center items-center flex-wrap'>
-      {ItemsList.map((r)=>{
+      {ItemsList?.map((r)=>{
         return <div className='m-5'><ItemCard details={r}/></div>
       })}
     </div>

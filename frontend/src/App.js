@@ -21,6 +21,7 @@ import ObjectDetection from "./components/ObjectDetection";
 import Chat from "./components/Chat";
 import Upload from "./components/Upload";
 import Message from "./components/Message";
+import Manage from "./pages/Manage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/reuse/:id" element={<Message />} />
           <Route path="/img-detect" element={<ObjectDetection />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path = "/manageItem" element = {<Manage />} />
         </Route>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

@@ -3,6 +3,7 @@ import { useUserContext } from '../utils/UserContext';
 import Cookies from "js-cookie";
 import { Link } from 'react-router-dom';
 import { useSocket } from '../utils/SocketContext';
+import useFetchItemList from '../utils/useFetchItemList';
 
 const NavBar = () => {
     const val = useUserContext();
@@ -18,7 +19,7 @@ val.setUserId(userId)
           socket.emit("registerUser", { userId: userId });
         });
 
-        
+          useFetchItemList();
 
   return (
     <div className="relative w-full bg-white">
@@ -56,6 +57,14 @@ val.setUserId(userId)
                 className="text-sm font-semibold text-gray-800 hover:text-gray-900"
               >
                 Add
+              </Link>
+            </li>
+             <li>
+              <Link
+                to={"/manageItem"}
+                className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+              >
+                Manage
               </Link>
             </li>
           </ul>
