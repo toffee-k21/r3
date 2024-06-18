@@ -12,14 +12,14 @@ const NavBar = () => {
     const userId = Cookies.get("userId");
     useEffect(()=>{
 val.setUserId(userId)
-    },[])
+},[])
 
-        const { socket } = useSocket();
-        socket.on("connect", () => {
-          socket.emit("registerUser", { userId: userId });
-        });
+const { socket } = useSocket();
+socket.on("connect", () => {
+  socket.emit("registerUser", { userId: userId });
+});
 
-          useFetchItemList();
+useFetchItemList();
 
   return (
     <div className="relative w-full bg-white">

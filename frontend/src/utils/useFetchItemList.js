@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from './itemSlice';
 
 const useFetchItemList = () => {
 
+    useEffect(()=>{
+        getItem();
+    },[])
     const dispatch = useDispatch();
-    const addItem = useSelector((state)=>state.item.addItem)
-const getItem = async ( )=>{
+    const xyz = useSelector((state)=>state.items);
+    // console.log("xyz",xyz);
+
+    const getItem = async ( )=>{
     const result = await fetch("http://localhost:5000/item/view/");
     const data = await result.json();
-    // console.log(data);
+    console.log(data);
     dispatch(addItem(data));
     // return data;
 }

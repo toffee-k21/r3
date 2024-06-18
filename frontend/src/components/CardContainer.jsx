@@ -8,11 +8,13 @@ const CardContainer = () => {
   const [ItemsList,setItemsList] = useState([]);
 
   const data = useSelector((state)=>state.item)
-  console.log(data)
+  console.log("data",data.itemList);
   
 // const data = useFetchItemList();
-// setItemsList(data);
-console.log(data);
+useEffect(()=>{
+  setItemsList(data.itemList);
+},[])
+// console.log(data);
   return (
     <div className='flex justify-center items-center flex-wrap'>
       {ItemsList?.map((r)=>{
