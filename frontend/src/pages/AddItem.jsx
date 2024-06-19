@@ -16,7 +16,8 @@ const AddItem = () => {
       const [priceForDay,setPriceForDay] = useState('');
       const [desc,setDesc] = useState('');
       const [category, setCategory] = useState("others");
-      const [imgUrl, setImgUrl] = useState("please upload img url")
+      const [imgUrl, setImgUrl] = useState("please upload img url");
+      const [msg, setMsg] = useState(null);
     //   const [userId,setUserId] = useState('');
 const user = useUserContext();
 const handleAdd = async( )=>{
@@ -38,6 +39,9 @@ const handleAdd = async( )=>{
     });
     const data = await result.json();
     console.log(data);
+    if(data){
+      setMsg(data.result);
+    }
 }
 useEffect(() => {
   if ("geolocation" in navigator) {
@@ -99,8 +103,9 @@ useEffect(() => {
         className=" m-4 rounded-full bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         onClick={handleAdd}
       >
-        Button text
+        Add
       </button>
+      <div>{msg}</div>
     </div>
   );
 }

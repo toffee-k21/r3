@@ -18,7 +18,7 @@ useEffect(()=>{
   return (
     <div className='flex justify-center items-center flex-wrap'>
       {ItemsList?.map((r)=>{
-        return <div className='m-5'><ItemCard details={r}/></div>
+        return <div className='lg:m-5 mx-1 my-3'><ItemCard details={r}/></div>
       })}
     </div>
   )

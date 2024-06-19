@@ -7,6 +7,7 @@ import { v4 } from "uuid";
 const Upload = ({ set }) => {
     console.log(set)
   const [img, setImg] = useState();
+   const [msg, setMsg] = useState();
   // const [imgUrl, setImgUrl] = useState("");
   
 
@@ -16,6 +17,7 @@ const handleUpload = ( ) =>{
 
   uploadBytes(imgRef, img).then((snapshot) => {
   set(`https://firebasestorage.googleapis.com/v0/b/r-cube-90296.appspot.com/o/files%2F${val}?alt=media`);
+  setMsg("uploaded")
 });
 }
 
@@ -49,7 +51,8 @@ const handleUpload = ( ) =>{
             // value={img}
             onChange={(e) => setImg(e.target.files[0])}
           />
-          <button onClick={handleUpload} type="submit">Upload</button>
+          <button className='bg-black text-white m-2 p-1' onClick={handleUpload} type="submit">Upload</button>
+          <div>{msg}</div>
     
       </div>
     </div>
