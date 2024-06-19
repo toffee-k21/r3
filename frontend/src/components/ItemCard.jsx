@@ -4,18 +4,18 @@ export function ItemCard({ details }) {
   const { itemName, desc, priceForDay, location, userId, category, imgUrl } =
     details;
   return (
-    <div className="w-[300px] rounded-md border">
+    <div className="lg:w-[300px] w-[90%] m-auto rounded-md border">
       {imgUrl ? (
         <img
           src={imgUrl}
           alt="Laptop"
-          className="h-[200px] w-full rounded-t-md object-cover"
+          className="lg:h-[200px] h-[120px] w-full rounded-t-md object-cover"
         />
       ) : (
         <img
           src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
           alt="Laptop"
-          className="h-[200px] w-full rounded-t-md object-cover"
+          className="lg:h-[200px] h-[120px] w-full rounded-t-md object-cover"
         />
       )}
       <div className="p-4">

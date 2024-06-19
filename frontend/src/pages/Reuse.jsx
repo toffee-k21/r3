@@ -5,7 +5,7 @@ const Reuse = () => {
 
   return (
     <div>
-      <h2>All Products</h2>
+      <h2 className='text-2xl font-semibold m-6'>All Products</h2>
       <CardContainer />
     </div>
   )
