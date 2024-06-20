@@ -58,9 +58,9 @@ useEffect(() => {
 
 
   return (
-    <div>
-      Latitude: {position.latitude}, Longitude: {position.longitude}
-      <div className="w-full md:w-1/3 m-4">
+    <div className=' mx-28 '>
+      {/* Latitude: {position.latitude}, Longitude: {position.longitude} */}
+      <div className="w-full md:w-1/2 m-4" >
         <Upload set={setImgUrl} />
         <input
           className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
@@ -70,7 +70,7 @@ useEffect(() => {
           onChange={(e) => setItemName(e.target.value)}
         ></input>
       </div>
-      <div className="w-full md:w-1/3 m-4">
+      <div className="w-full md:w-1/2 m-4">
         <input
           className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
           type="number"
@@ -79,7 +79,7 @@ useEffect(() => {
           onChange={(e) => setPriceForDay(e.target.value)}
         ></input>
       </div>
-      <div className="w-full md:w-1/3 m-4">
+      <div className="w-full md:w-1/2 m-4">
         <textarea
           className="flex h-20 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
           //   type=""
@@ -88,7 +88,7 @@ useEffect(() => {
           onChange={(e) => setDesc(e.target.value)}
         ></textarea>
       </div>
-      <div className="w-full md:w-1/3 m-4">
+      <div className="w-full md:w-1/2 m-4">
         <select onChange={(e) => setCategory(e.target.value)}>
           <option value="electronics">Electronics</option>
           <option value="toy">Toy</option>

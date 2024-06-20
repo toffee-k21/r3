@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useUserContext } from "../utils/UserContext";
 
 export function ItemCard({ details }) {
   const { itemName, desc, priceForDay, location, userId, category, imgUrl } =
     details;
+
+    const uId = useUserContext();
   return (
     <div className="lg:w-[300px] w-[90%] m-auto rounded-md border">
       {imgUrl ? (
@@ -28,14 +31,15 @@ export function ItemCard({ details }) {
             #{category}
           </span>
         </div>
-        <Link to={`/reuse/${userId}`}>
+        {(userId == uId.userId) ? <div></div>: <Link to={`/reuse/${userId}`}>
           <button
             type="button"
             className="mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
             Use
           </button>
-        </Link>
+        </Link>}
+      
       </div>
     </div>
   );

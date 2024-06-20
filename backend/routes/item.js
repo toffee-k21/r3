@@ -27,4 +27,8 @@ ItemRouter.post("/add", async (req, res) => {
   if (addItem) res.send({ result: "Successfully added !" });
 });
 
+ItemRouter.delete("./", async (req,res)=>{
+  const data = await Item.deleteOne(req.body);
+})
+
 module.exports = ItemRouter;
