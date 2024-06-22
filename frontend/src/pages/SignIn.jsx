@@ -9,6 +9,7 @@ export function SignIn() {
   const [password,setPassword] = useState('');
   const [email,setEmail] = useState('');
   const navigate = useNavigate();
+     const {setUserId} =  useUserContext();
 
 const userAuth = async()=>{
   console.log(JSON.stringify({ email: email, password: password }));
@@ -24,6 +25,7 @@ const userAuth = async()=>{
   if(data){
     Cookies.set("access_token", data.result);
     Cookies.set("userId", data.userId);
+    setUserId(data.userId);
   navigate("/");
   }
   else{

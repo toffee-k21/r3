@@ -1,28 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUserContext } from '../utils/UserContext';
 import Cookies from "js-cookie";
 import { Link } from 'react-router-dom';
 import { useSocket } from '../utils/SocketContext';
 import useFetchItemList from '../utils/useFetchItemList';
+import Logout from './Logout';
 // import {logo} from "../../public/images/logo.png"/
 
 const NavBar = () => {
     const val = useUserContext();
-    // const { userId }= useUserContext()
-    console.log(val)
-    const userId = Cookies.get("userId");
-    useEffect(()=>{
-val.setUserId(userId)
-},[])
+
+    const [uId,setUId] = useState('');
+  
+    const ID = Cookies.get("userId");
+
+
+    
+// let userId;
+// userId
+ const authToken = Cookies.get("access_token");
 
 const { socket } = useSocket();
 socket.on("connect", () => {
-  socket.emit("registerUser", { userId: userId });
+  socket.emit("registerUser", { userId: uId });
 });
+
+
 
 useFetchItemList();
 
-  return (
+  return authToken ? (
     <div className="relative w-full bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center">
@@ -58,7 +65,7 @@ useFetchItemList();
             </li>
           </ul>
         </div>
-        <div className='hidden md:block'>UserId: {userId}</div>
+        <div className='hidden md:block'>UserId: {ID}</div>
         <div className="hidden lg:block">
           <Link to="/chat">
             <button
@@ -69,8 +76,10 @@ useFetchItemList();
             </button>
           </Link>
         </div>
+        <Logout />
       </div>
     </div>
-  );
+  ): 
+  (<div></div>);
 }
 export default NavBar

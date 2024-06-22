@@ -5,7 +5,7 @@ import { v4 } from "uuid";
 
 
 const Upload = ({ set }) => {
-    console.log(set)
+    // console.log(set)
   const [img, setImg] = useState();
    const [msg, setMsg] = useState();
   // const [imgUrl, setImgUrl] = useState("");
