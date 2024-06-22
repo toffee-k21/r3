@@ -32,13 +32,14 @@ useFetchItemList();
   return authToken ? (
     <div className="relative w-full bg-white">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
-        <div className="inline-flex items-center">
+      <div className='flex'>
+          <div className="inline-flex items-center m-1">
    <img className="lg:w-[60px] w-[50px]" src={"/images/logo.png"}/>
           {/* <span className="font-bold">R<sup>3</sup></span> */}
         </div>
         <div className='block lg:hidden'>hambuger</div>
         <div className="hidden lg:block">
-          <ul className="inline-flex space-x-8">
+          <ul className="flex space-x-8 w-[300px] justify-center items-center my-6">
             <li>
               <Link
                 to={"/reuse"}
@@ -65,8 +66,10 @@ useFetchItemList();
             </li>
           </ul>
         </div>
-        <div className='hidden md:block'>UserId: {ID}</div>
-        <div className="hidden lg:block">
+      </div>
+   <div className='flex'>
+         <div className='hidden md:block m-2'>UserId: {ID}</div>
+        <div className="hidden lg:block m-2">
           <Link to="/chat">
             <button
               type="button"
@@ -77,6 +80,7 @@ useFetchItemList();
           </Link>
         </div>
         <Logout />
+   </div>
       </div>
     </div>
   ): 
