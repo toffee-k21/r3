@@ -12,7 +12,7 @@ const Message = () => {
   const [uId, setUId] = useState("n/a");
 
   const ID = Cookies.get("userId");
-  console.log("ID", ID);
+  // console.log("ID", ID);
 
   // useEffect(() => {
   //   setUId(ID);
@@ -67,7 +67,7 @@ const Message = () => {
   // console.log(JSON.stringify({ from: Appuser.userId, to: params.id }));
 
   const fetchMessage = async () => {
-    console.log("userId", ID);
+    console.log("userId", ID); //  not used uId becaue *at last of the page
     const result = await fetch("http://localhost:5000/chat/", {
       method: "post",
       body: JSON.stringify({ from: ID, to: params.id }),
@@ -77,7 +77,7 @@ const Message = () => {
     });
     const data = await result.json();
     // console.log("data hai bro", data);
-    console.log("data", data);
+    // console.log("data", data);
     const { messages } = data;
     // console.log("messages", messages);
     setMessageData(messages);
@@ -115,5 +115,8 @@ const Message = () => {
     </div>
   );
 };
+// concept:
+// The issue you're encountering where uId is not correctly showing a value in the fetchMessage function is due to how the state update works in React. React's setState (like setUId) is asynchronous, meaning the updated state (uId) may not be immediately available right after calling setUId.
 
+// In your fetchMessage function, you're trying to use uId right after setting it, but React hasn't finished updating the state yet. This is why uId is empty, whereas ID from the cookie works because it's immediately available.
 export default Message;
