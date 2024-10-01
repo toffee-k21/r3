@@ -2,14 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useSocket } from "../utils/SocketContext";
 import { useParams } from "react-router-dom";
 import { useUserContext } from "../utils/UserContext";
+import Cookies from "js-cookie";
 
 const Message = () => {
   const [message, setMessage] = useState("");
   const [messageData, setMessageData] = useState([]);
-  const [userId, setUserId] = useState();
   // const [err,setErr] = useState(false);
 
-  setUserId(useUserContext().userId);
+  const [uId, setUId] = useState("n/a");
+
+  const ID = Cookies.get("userId");
+  console.log("ID", ID);
+
+  // useEffect(() => {
+  //   setUId(ID);
+  // }, []);
   // console.log(Appuser.userId);
   const { socket } = useSocket();
 
@@ -18,12 +25,12 @@ const Message = () => {
 
   const sendMessage = () => {
     socket.emit("message", {
-      from: userId,
+      from: uId,
       to: params.id,
       message: message,
     });
     setMessageData((prev) => {
-      const val = `${userId} : ${message}`;
+      const val = `${uId} : ${message}`;
       try {
         return [...prev, val];
       } catch (err) {
@@ -53,16 +60,17 @@ const Message = () => {
   }, [socket]);
 
   useEffect(() => {
+    setUId(ID);
     fetchMessage();
   }, []);
 
   // console.log(JSON.stringify({ from: Appuser.userId, to: params.id }));
 
   const fetchMessage = async () => {
-    console.log("userId", userId);
+    console.log("userId", ID);
     const result = await fetch("http://localhost:5000/chat/", {
       method: "post",
-      body: JSON.stringify({ from: userId, to: params.id }),
+      body: JSON.stringify({ from: ID, to: params.id }),
       headers: {
         "Content-Type": "Application/json",
       },
@@ -70,9 +78,9 @@ const Message = () => {
     const data = await result.json();
     // console.log("data hai bro", data);
     console.log("data", data);
-    // const { messages } = data;
+    const { messages } = data;
     // console.log("messages", messages);
-    // setMessageData(messages);
+    setMessageData(messages);
     // console.log(messageData);
   };
 
