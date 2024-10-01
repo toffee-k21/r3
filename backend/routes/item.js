@@ -23,7 +23,7 @@ ItemRouter.post("/add", async (req, res) => {
     userId: req.body.userId,
   });
   // const result = addItem
-  console.log(addItem);
+  // console.log(addItem);
   if (addItem) res.send({ result: "Successfully added !" });
 });
 

@@ -15,7 +15,7 @@ const useFetchItemList = () => {
     const getItem = async ( )=>{
     const result = await fetch("http://localhost:5000/item/view/");
     const data = await result.json();
-    console.log(data);
+    // console.log(data);
     dispatch(addItem(data));
     // return data;
 }

@@ -17,7 +17,7 @@ const value = await fetch("http://localhost:5000/user/signup", {
   },
 });
 const data = await value.json();
-console.log(data);
+// console.log(data);
 navigate("/signin");
   }
 

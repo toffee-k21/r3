@@ -17,7 +17,7 @@ userRouter.post("/signup", async (req, res) => {
         email: req.body.email,
         password: req.body.password,
       });
-      console.log(data);
+      // console.log(data);
       // res.redirect("/");
       res.send({result:"successfully created"});
     } catch (error) {
@@ -37,7 +37,7 @@ res.json({result:token, userId:userVal._id});
 // console.log(token);
 // res.setHeader("Content-Type", "application/json");
   } else{
-console.log("na")
+// console.log("na")
   }
   // res.redirect("/");
 

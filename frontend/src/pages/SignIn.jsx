@@ -12,7 +12,7 @@ export function SignIn() {
      const {setUserId} =  useUserContext();
 
 const userAuth = async()=>{
-  console.log(JSON.stringify({ email: email, password: password }));
+  // console.log(JSON.stringify({ email: email, password: password }));
   const value = await fetch("http://localhost:5000/user/signin", {
     method: "Post",
     body: JSON.stringify({ email: email, password: password }),
@@ -21,7 +21,7 @@ const userAuth = async()=>{
     },
   });
   const data = await value.json();
-  console.log(data)
+  // console.log(data)
   if(data){
     Cookies.set("access_token", data.result);
     Cookies.set("userId", data.userId);
@@ -29,7 +29,7 @@ const userAuth = async()=>{
   navigate("/");
   }
   else{
-    console.log("invalid user credentials");
+    // console.log("invalid user credentials");
   }
 
 }

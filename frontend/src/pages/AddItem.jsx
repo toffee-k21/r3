@@ -21,7 +21,7 @@ const AddItem = () => {
     //   const [userId,setUserId] = useState('');
 const user = useUserContext();
 const handleAdd = async( )=>{
-    console.log(user.userId, itemName, priceForDay, desc, category, position);
+    // console.log(user.userId, itemName, priceForDay, desc, category, position);
     const result = await fetch("http://localhost:5000/item/add", {
       method: "post",
       body: JSON.stringify({
@@ -38,7 +38,7 @@ const handleAdd = async( )=>{
       }
     });
     const data = await result.json();
-    console.log(data);
+    // console.log(data);
     if(data){
       setMsg(data.result);
     }
@@ -52,7 +52,7 @@ useEffect(() => {
       });
     });
   } else {
-    console.log("Geolocation is not available in your browser.");
+    // console.log("Geolocation is not available in your browser.");
   }
 }, []);
 

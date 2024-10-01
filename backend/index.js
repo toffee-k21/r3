@@ -19,8 +19,6 @@ const io = new Server({
   cors: true,
 });
 
-const userIdToSocketIdMap = new Map();
-
 app.use(express.json()); //middleware for form data
 
 app.get("/", (req, res) => {
@@ -50,48 +48,12 @@ app.use("/chat", chatRouter);
 
 app.use("/upload", UploadRouter);
 
+const userIdToSocketIdMap = new Map();
+
+require("./socket")(io, userIdToSocketIdMap);
+
 app.listen(5000, () => {
   console.log("server started");
-});
-io.on("connection", (socket) => {
-  console.log("new connection");
-
-  socket.on("registerUser", (data) => {
-    userIdToSocketIdMap.set(data.userId, socket.id);
-  });
-
-  socket.on("message", async (data) => {
-    const socketId = userIdToSocketIdMap.get(data.to);
-    const socketIdFrom = userIdToSocketIdMap.get(data.from);
-    socket.to(socketId).emit("message", data);
-    // socket.to(socketIdFrom).emit("message", data);
-
-    const findInstance = await Chat.findOne({
-      $or: [
-        { from: data.from, to: data.to },
-        { from: data.to, to: data.from },
-      ],
-    });
-    console.log(findInstance);
-
-    if (findInstance) {
-      const enterData = await Chat.findOneAndUpdate(
-        {
-          $or: [
-            { from: data.from, to: data.to },
-            { from: data.to, to: data.from },
-          ],
-        },
-        { $push: { messages: `${data.from} : ${data.message} ` } }
-      );
-    } else {
-      const createInstance = await Chat.create({
-        from: data.from,
-        to: data.to,
-        messages: `${data.from} : ${data.message} `,
-      });
-    }
-  });
 });
 
 io.listen(5001);

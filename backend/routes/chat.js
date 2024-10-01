@@ -14,7 +14,7 @@ chatRouter.get("/:id", async (req, res) => {
   }
 });
 chatRouter.post("/", async (req, res) => {
-  // console.log(req.body.to, req.body.from);
+  console.log("to: ",req.body.to," from: ", req.body.from);
   const data = await Chat.findOne({
     $or: [
       { from: req.body.from, to: req.body.to },
@@ -22,12 +22,12 @@ chatRouter.post("/", async (req, res) => {
     ],
   });
   // res.send(data);
-  console.log(data);
-  if (data != null) {
+  // console.log(data);
+  // if (data != null) {
     res.json(data);
-  } else {
-    res.json({ result: "not available" });
-  }
+  // } else {
+  //   res.json({ result: "not available" });
+  // }
 });
 
 module.exports = chatRouter;

@@ -7,11 +7,10 @@ const Reuse = () => {
  const val = useUserContext();
 
     const [uId,setUId] = useState('');
-  
 
     useEffect(()=>{
       const ID = Cookies.get("userId");
-      console.log("cookee id",typeof(ID));
+      // console.log("cookee id",typeof(ID));
       if(ID == " " || undefined){
         setUId(val.userId);
       }

@@ -6,78 +6,79 @@ import { useUserContext } from "../utils/UserContext";
 const Message = () => {
   const [message, setMessage] = useState("");
   const [messageData, setMessageData] = useState([]);
+  const [userId, setUserId] = useState();
   // const [err,setErr] = useState(false);
 
-  const Appuser = useUserContext();
-  console.log(Appuser.userId);
+  setUserId(useUserContext().userId);
+  // console.log(Appuser.userId);
   const { socket } = useSocket();
 
   const params = useParams();
-  console.log("params", params.id);
+  // console.log("params", params.id);
 
   const sendMessage = () => {
     socket.emit("message", {
-      from: Appuser.userId,
+      from: userId,
       to: params.id,
       message: message,
     });
-    setMessageData((prev)=>{
-       const val = `${Appuser.userId} : ${message}`;
-      try{
-        return [...prev, val]
-      } catch (err){
+    setMessageData((prev) => {
+      const val = `${userId} : ${message}`;
+      try {
+        return [...prev, val];
+      } catch (err) {
         // console.log(err)
         // setErr(true);
-        return [val]
+        return [val];
       }
-    })
+    });
   };
 
   // console.log(err);
 
-    useEffect(() => {
-
-      const handleMessage = (data) => {
-        const {from, message} = data
-        console.log(from, message)
-        const val = `${from} : ${message}`
-        setMessageData((prev) => [...prev, val]);
-      };
-
-      socket.on("message", handleMessage);
-
-      // Clean up the event listener on component unmount
-      return () => {
-        socket.off("message", handleMessage);
-      };
-    }, [socket]);
-    // socket.off("message");
-
-
+  useEffect(() => {
+    const handleMessage = (data) => {
+      console.log(data);
+      const { from, message } = data;
+      // console.log(from, message)
+      const val = `${from} : ${message}`;
+      console.log("val : ", val);
+      setMessageData((prev) => [...prev, val]);
+    };
+    socket.on("message", handleMessage);
+    // // Clean up the event listener on component unmount
+    return () => {
+      socket.off("message", handleMessage);
+    };
+  }, [socket]);
 
   useEffect(() => {
     fetchMessage();
   }, []);
 
-  console.log(JSON.stringify({ from: Appuser.userId, to: params.id }));
+  // console.log(JSON.stringify({ from: Appuser.userId, to: params.id }));
 
   const fetchMessage = async () => {
+    console.log("userId", userId);
     const result = await fetch("http://localhost:5000/chat/", {
       method: "post",
-      body: JSON.stringify({ from: Appuser.userId, to: params.id }),
+      body: JSON.stringify({ from: userId, to: params.id }),
       headers: {
         "Content-Type": "Application/json",
       },
     });
     const data = await result.json();
-    console.log("data hai bro", data);
-    const { messages } = data;
-    setMessageData(messages);
+    // console.log("data hai bro", data);
+    console.log("data", data);
+    // const { messages } = data;
+    // console.log("messages", messages);
+    // setMessageData(messages);
     // console.log(messageData);
   };
 
   return (
-    <div className="">
+    <div>
+      <h1>Your chats:</h1>
       <div
         style={{ scrollbarWidth: "none" }}
         className="w-1/2 h-screen overflow-auto"
@@ -88,7 +89,7 @@ const Message = () => {
           );
         })}
       </div>
-      <div className="w-full m-auto fixed bottom-0 bg-gray-600">
+      <div className="w-full m-auto bottom-0 ">
         <input
           type="text"
           placeholder="Enter Your Message"

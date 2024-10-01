@@ -8,13 +8,13 @@ const Chat = () => {
   const Appuser = useUserContext();
   // const { socket } = useSocket();
   // const [message, setMessage] = useState("");
-  console.log(`http://localhost:5000/chat/${Appuser.userId}`);
+  // console.log(`http://localhost:5000/chat/${Appuser.userId}`);
 
   const fetchChat = async () => {
     if (Appuser.userId) {
       const chat = await fetch(`http://localhost:5000/chat/${Appuser.userId}`);
       const data = await chat.json();
-      console.log("data", data);
+      // console.log("data", data);
       setChatList(data);
     }
   };

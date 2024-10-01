@@ -9,12 +9,12 @@ const Manage = () => {
    const [ msg, setMsg ] =  useState([]);
 
   const data = useSelector((store)=>store.item.itemList);
-  console.log(data);
+  // console.log(data);
   useEffect(()=>{
     setList(data);
   },[])
   const uId = useUserContext();
-  console.log(uId.userId)
+  // console.log(uId.userId)
   
   const handleDelete = async (r) =>{
     const val = await fetch("http://localhost:5000/item/",{

@@ -8,7 +8,7 @@ const CardContainer = () => {
   const [ItemsList,setItemsList] = useState([]);
 
   const data = useSelector((state)=>state.item)
-  console.log("data",data.itemList);
+  // console.log("data",data.itemList);
   
 // const data = useFetchItemList();
 useEffect(()=>{
