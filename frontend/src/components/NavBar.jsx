@@ -31,7 +31,7 @@ const NavBar = () => {
   useFetchItemList();
 
   return authToken ? (
-    <div className="z-20 w-full absolute">
+    <div className="z-20 w-full fixed top-0 bg-gray-800/10">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex">
           <div className="inline-flex items-center m-1">
