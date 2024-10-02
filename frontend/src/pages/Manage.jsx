@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { ItemCard } from '../components/ItemCard';
+import  ItemCard  from '../components/ItemCard';
 import { useUserContext } from '../utils/UserContext';
 import useFetchItemList from '../utils/useFetchItemList';
 

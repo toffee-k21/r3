@@ -31,12 +31,14 @@ const NavBar = () => {
   useFetchItemList();
 
   return authToken ? (
-    <div className="relative w-full bg-white">
+    <div className="z-20 w-full absolute">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex">
           <div className="inline-flex items-center m-1">
-            <img className="lg:w-[60px] w-[50px]" src={"/images/logo.png"} />
-            {/* <span className="font-bold">R<sup>3</sup></span> */}
+            <Link to={"/"}>
+              <img className="lg:w-[60px] w-[50px]" src={"/images/logo.png"} />
+              {/* <span className="font-bold">R<sup>3</sup></span> */}
+            </Link>
           </div>
           <div className="block lg:hidden">hambuger</div>
           <div className="hidden lg:block">
@@ -44,7 +46,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to={"/reuse"}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  className="text-sm font-semibold text-gray-500 hover:text-gray-900"
                 >
                   Reuse
                 </Link>
@@ -52,7 +54,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to={"/additem"}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  className="text-sm font-semibold text-gray-500 hover:text-gray-900"
                 >
                   Add
                 </Link>
@@ -60,7 +62,7 @@ const NavBar = () => {
               <li>
                 <Link
                   to={"/manageItem"}
-                  className="text-sm font-semibold text-gray-800 hover:text-gray-900"
+                  className="text-sm font-semibold text-gray-500 hover:text-gray-900"
                 >
                   Manage
                 </Link>
@@ -69,12 +71,12 @@ const NavBar = () => {
           </div>
         </div>
         <div className="flex">
-          <div className="hidden md:block m-2">UserId: {ID}</div>
+          <div className="hidden md:block m-2 text-gray-500">UserId: {ID}</div>
           <div className="hidden lg:block m-2">
             <Link to="/chat">
               <button
                 type="button"
-                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-gray-500 shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
                 Chat
               </button>
