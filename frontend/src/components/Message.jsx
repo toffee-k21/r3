@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSocket } from "../utils/SocketContext";
 import { useParams } from "react-router-dom";
 import { useUserContext } from "../utils/UserContext";
@@ -7,6 +7,7 @@ import { ShootingStars } from "./ui/shooting-stars";
 import { StarsBackground } from "./ui/stars-background";
 
 const Message = () => {
+    const messageContainerRef = useRef(null);
   const [message, setMessage] = useState("");
   const [messageData, setMessageData] = useState([]);
   // const [err,setErr] = useState(false);
@@ -65,6 +66,13 @@ const Message = () => {
     setUId(ID);
     fetchMessage();
   }, []);
+   useEffect(() => {
+     // Scroll to the bottom of the div
+     if (messageContainerRef.current) {
+       messageContainerRef.current.scrollTop =
+         messageContainerRef.current.scrollHeight;
+     }
+   }, [messageData]);
 
   // console.log(JSON.stringify({ from: Appuser.userId, to: params.id }));
 
@@ -80,9 +88,13 @@ const Message = () => {
     const data = await result.json();
     // console.log("data hai bro", data);
     // console.log("data", data);
-    const { messages } = data;
+    try{
+      const { messages } = data;
+      setMessageData(messages);
+    }catch(err){
+      console.log(err)
+    }
     // console.log("messages", messages);
-    setMessageData(messages);
     // console.log(messageData);
   };
   console.log(messageData);
@@ -91,7 +103,8 @@ const Message = () => {
       <div className="mt-28">
         <div
           style={{ scrollbarWidth: "none" }}
-          className="h-[600px] overflow-auto mx-28"
+          className="h-[440px] overflow-auto mx-28"
+          ref={messageContainerRef}
         >
           {messageData?.map((r) => {
             r = r.split(":");
@@ -111,16 +124,16 @@ const Message = () => {
             }
           })}
         </div>
-        <div className="w-[80%] bottom-0 fixed">
+        <div className="w-[90%] bottom-0 mx-16 ">
           <input
             type="text"
             placeholder="Enter Your Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className=" w-[92%] my-2 p-4"
+            className=" w-[89%] my-3 p-4 bg-gray-500"
           />
           <button
-            className="rounded-md bg-black px-4 py-4 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            className="rounded-md bg-black py-5 px-10 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             onClick={sendMessage}
           >
             send
