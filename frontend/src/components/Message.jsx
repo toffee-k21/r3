@@ -3,8 +3,8 @@ import { useSocket } from "../utils/SocketContext";
 import { useParams } from "react-router-dom";
 import { useUserContext } from "../utils/UserContext";
 import Cookies from "js-cookie";
-
-
+import { ShootingStars } from "./ui/shooting-stars";
+import { StarsBackground } from "./ui/stars-background";
 
 const Message = () => {
   const [message, setMessage] = useState("");
@@ -59,7 +59,7 @@ const Message = () => {
     return () => {
       socket.off("message", handleMessage);
     };
-  }, [socket]);
+  }, [socket, messageData]);
 
   useEffect(() => {
     setUId(ID);
@@ -85,37 +85,53 @@ const Message = () => {
     setMessageData(messages);
     // console.log(messageData);
   };
-
+  console.log(messageData);
   return (
-    <div>
-      <h1>Your chats:</h1>
-      <div
-        style={{ scrollbarWidth: "none" }}
-        className="w-1/2 h-screen overflow-auto"
-      >
-        {messageData?.map((r) => {
-          return (
-            <div className="p-2 m-2 bg-black text-white rounded-md">{r}</div>
-          );
-        })}
-      </div>
-      <div className="w-full m-auto bottom-0 ">
-        <input
-          type="text"
-          placeholder="Enter Your Message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className="p-2 w-2/4 my-2"
-        />
-        <button
-          className="m-2 rounded-md bg-black px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          onClick={sendMessage}
+    <>
+      <div className="mt-28">
+        <div
+          style={{ scrollbarWidth: "none" }}
+          className="h-[600px] overflow-auto mx-28"
         >
-          send
-        </button>
+          {messageData?.map((r) => {
+            r = r.split(":");
+            // console.log(`${r[0]}` == `${ID} `, r[0],ID);
+            if (`${r[0]}` == `${ID} `) {
+              return (
+                <div className="p-4 my-2 bg-black text-white rounded-md w-[30%] translate-x-[230%]">
+                  {r[1]}
+                </div>
+              );
+            } else {
+              return (
+                <div className="p-4 my-2 bg-blue-500 text-white rounded-md w-[30%]">
+                  {r[1]}
+                </div>
+              );
+            }
+          })}
+        </div>
+        <div className="w-[80%] bottom-0 fixed">
+          <input
+            type="text"
+            placeholder="Enter Your Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className=" w-[92%] my-2 p-4"
+          />
+          <button
+            className="rounded-md bg-black px-4 py-4 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            onClick={sendMessage}
+          >
+            send
+          </button>
+        </div>
+        <div className=" absolute top-0 z-[-10] h-[40rem] rounded-md bg-neutral-900 flex flex-col w-full ">
+          <ShootingStars />
+          <StarsBackground />
+        </div>
       </div>
-  
-    </div>
+    </>
   );
 };
 // concept:
