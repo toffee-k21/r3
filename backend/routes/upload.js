@@ -1,28 +1,40 @@
-//no use//-> used firebase 
-
+const cloudinary = require("cloudinary").v2;
 const express = require("express");
-const path = require("path")
 const UploadRouter = express.Router();
 const multer = require("multer");
-// const upload = multer({ dest: "./uploads" });
+// Set up multer for file uploads
+const storage = multer.memoryStorage(); // Store files in memory
+const upload = multer({ storage });
+const API_KEY_SECRET = process.env.API_KEY_SECRET;
 
+// Configuration
+cloudinary.config({
+  cloud_name: "dgxggi8xx",
+  api_key: "946199172599922",
+  api_secret: `${API_KEY_SECRET}`,
+});
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + file.originalname;
-    cb(null, uniqueSuffix);
+async function handleUpload(file) {
+  const res = await cloudinary.uploader.upload(file, {
+    resource_type: "auto",
+  });
+  return res;
+}
+
+UploadRouter.post("/", upload.single("item"), async (req, res) => {
+  try {
+    const b64 = Buffer.from(req.file.buffer).toString("base64");
+    let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+    // console.log(dataURI)
+    const cldRes = await handleUpload(dataURI);
+    res.json(cldRes);
+    console.log("success",cldRes)
+  } catch (error) {
+    console.log(error);
+    res.send({
+      message: error.message,
+    });
   }
 });
-const upload = multer({ storage: storage });
-
-UploadRouter.post("/", upload.single("file"), (req, res) => {
-  // console.log(req.file);
-  // console.log(req.file.mimetype.split("/").at(-1));
-  res.status(200).json({result: "done"});
-});
-
 
 module.exports = UploadRouter;

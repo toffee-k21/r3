@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
-import { v4 } from "uuid";
 
 
 const Upload = ({ set }) => {
     // console.log(set)
+// const {setImgUrl} = set;
   const [img, setImg] = useState();
    const [msg, setMsg] = useState();
-  // const [imgUrl, setImgUrl] = useState("");
+
+   const formData = new FormData();
+   formData.append("item", img);
+   console.log(formData)
   
+const handleUpload = async ( ) =>{
+const resp = await fetch("http://localhost:5000/upload/", {
+  method: "POST",
+  body: formData,
+  headers: {
+    // "Content-Type" : "multipart/form-data", no need
+  },
+});
 
-const handleUpload = ( ) =>{
-
+const data = await resp.json();
+console.log(data.secure_url);
+set(data.secure_url);
 }
 
   return (
