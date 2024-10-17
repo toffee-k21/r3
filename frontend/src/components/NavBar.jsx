@@ -9,23 +9,17 @@ import Logout from "./Logout";
 
 const NavBar = () => {
   const val = useUserContext();
+  const uId = Cookies.get("userId");
 
-  const [uId, setUId] = useState("");
-
-  const ID = Cookies.get("userId");
-  console.log("ID", ID);
-
-  useEffect(() => {
-    setUId(ID);
-  }, []);
-
-  // let userId;
-  // userId
   const authToken = Cookies.get("access_token");
 
   const { socket } = useSocket();
   socket.on("connect", () => {
     socket.emit("registerUser", { userId: uId });
+  });
+
+  socket.on("registered-user", (data)=>{
+     localStorage.setItem("socket-id",data);
   });
 
   useFetchItemList();
@@ -71,7 +65,7 @@ const NavBar = () => {
           </div>
         </div>
         <div className="flex">
-          <div className="hidden md:block m-2 text-gray-500">UserId: {ID}</div>
+          <div className="hidden md:block m-2 text-gray-500">UserId: {uId}</div>
           <div className="hidden lg:block m-2">
             <Link to="/chat">
               <button

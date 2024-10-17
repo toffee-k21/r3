@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import urls from "../utils/urls.json";
+const server_url = urls.server_url;
 
 export function SignUp() {
   const navigate = useNavigate();
@@ -9,7 +11,7 @@ export function SignUp() {
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
   const userAuth = async ()=>{
-const value = await fetch("http://localhost:5000/user/signup", {
+const value = await fetch(`${server_url}/user/signup`, {
   method: "Post",
   body: JSON.stringify({ userName: userName, email: email, password: password }),
   headers: {

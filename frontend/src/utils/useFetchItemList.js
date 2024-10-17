@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './itemSlice';
+import urls from "../utils/urls.json";
+const server_url = urls.server_url;
 
 //here arg is in array
 const useFetchItemList = () => {
@@ -13,7 +15,7 @@ const useFetchItemList = () => {
     // console.log("xyz",xyz);
 
     const getItem = async ( )=>{
-    const result = await fetch("http://localhost:5000/item/view/");
+    const result = await fetch(`${server_url}/item/view/`);
     const data = await result.json();
     // console.log(data);
     dispatch(addItem(data));

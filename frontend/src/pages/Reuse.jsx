@@ -25,7 +25,7 @@ const Reuse = () => {
   return (
     <div className="h-[40rem] rounded-md bg-neutral-900 flex flex-col w-full ">
       <CardContainer />
-      <div className="fixed h-[40rem] rounded-md bg-neutral-900 flex flex-col w-full ">
+      <div className="fixed h-[40rem] rounded-md bg-neutral-900 flex flex-col w-full z-0 ">
         <ShootingStars />
         <StarsBackground />
       </div>

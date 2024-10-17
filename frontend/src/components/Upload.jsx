@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 
 
 const Upload = ({ set }) => {
-    // console.log(set)
-// const {setImgUrl} = set;
+
   const [img, setImg] = useState();
    const [msg, setMsg] = useState();
 

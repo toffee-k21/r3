@@ -10,6 +10,7 @@ const secretkey = "secretkey";
 const { Server, Socket } = require("socket.io");
 const Chat = require("./models/Chat");
 const UploadRouter = require("./routes/upload");
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
@@ -53,8 +54,9 @@ const userIdToSocketIdMap = new Map();
 
 require("./socket")(io, userIdToSocketIdMap);
 
-app.listen(5000, () => {
-  console.log("server started");
+const PORT = 5000;
+const server = app.listen(PORT || process.env.PORT, () => {
+  console.log(`server started at ${PORT}`);
 });
 
-io.listen(5001);
+io.attach(server);

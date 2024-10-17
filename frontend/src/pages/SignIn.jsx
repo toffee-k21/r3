@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useUserContext } from "../utils/UserContext";
-
+import urls from "../utils/urls.json";
+const server_url = urls.server_url;
 
 export function SignIn() {
   const [password,setPassword] = useState('');
@@ -13,11 +14,11 @@ export function SignIn() {
 
 const userAuth = async()=>{
   // console.log(JSON.stringify({ email: email, password: password }));
-  const value = await fetch("http://localhost:5000/user/signin", {
+  const value = await fetch(`${server_url}/user/signin`, {
     method: "Post",
     body: JSON.stringify({ email: email, password: password }),
     headers: {
-      "Content-Type": "application/json",//headers pass krna jaroori hota hai
+      "Content-Type": "application/json", //headers pass krna jaroori hota hai
     },
   });
   const data = await value.json();
