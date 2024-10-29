@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useSocket } from "../utils/SocketContext";
 import useFetchItemList from "../utils/useFetchItemList";
 import Logout from "./Logout";
+import Hamburger from "./Hamburger";
 // import {logo} from "../../public/images/logo.png"/
 
 const NavBar = () => {
@@ -28,13 +29,12 @@ const NavBar = () => {
     <div className="z-20 w-full fixed top-0 bg-gray-800/10">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex">
-          <div className="inline-flex items-center m-1">
+          <div className="inline-flex items-center m-1 z-50">
             <Link to={"/"}>
               <img className="lg:w-[60px] w-[50px]" src={"/images/logo.png"} />
               {/* <span className="font-bold">R<sup>3</sup></span> */}
             </Link>
           </div>
-          <div className="block lg:hidden">hambuger</div>
           <div className="hidden lg:block">
             <ul className="flex space-x-8 w-[300px] justify-center items-center my-6">
               <li>
@@ -64,9 +64,9 @@ const NavBar = () => {
             </ul>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex z-50">
           <div className="hidden md:block m-2 text-gray-500">UserId: {uId}</div>
-          <div className="hidden lg:block m-2">
+          <div className=" m-2">
             <Link to="/chat">
               <button
                 type="button"
@@ -78,6 +78,9 @@ const NavBar = () => {
           </div>
           <Logout />
         </div>
+      </div>
+      <div className="w-[100%]">
+      <div className="block lg:hidden absolute left-0"><Hamburger /></div>
       </div>
     </div>
   ) : (

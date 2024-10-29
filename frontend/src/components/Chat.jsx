@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { useUserContext } from "../utils/UserContext";
 import { ShootingStars } from "./ui/shooting-stars";
 import { StarsBackground } from "./ui/stars-background";
+import urls from "../utils/urls.json";
+const server_url = urls.server_url;
 
 const Chat = () => {
   const [chatList, setChatList] = useState([]);
@@ -14,7 +16,7 @@ const Chat = () => {
 
   const fetchChat = async () => {
     if (Appuser.userId) {
-      const chat = await fetch(`http://localhost:5000/chat/${Appuser.userId}`);
+      const chat = await fetch(`http://${server_url}/chat/${Appuser.userId}`);
       const data = await chat.json();
       // console.log("data", data);
       setChatList(data);

@@ -5,6 +5,8 @@ import { useUserContext } from "../utils/UserContext";
 import Cookies from "js-cookie";
 import { ShootingStars } from "./ui/shooting-stars";
 import { StarsBackground } from "./ui/stars-background";
+import urls from "../utils/urls.json";
+const server_url = urls.server_url;
 
 const Message = () => {
     const messageContainerRef = useRef(null);
@@ -78,7 +80,7 @@ const Message = () => {
 
   const fetchMessage = async () => {
     console.log("userId", ID); //  not used uId becaue *at last of the page
-    const result = await fetch("http://localhost:5000/chat/", {
+    const result = await fetch(`http://${server_url}/chat/`, {
       method: "post",
       body: JSON.stringify({ from: ID, to: params.id }),
       headers: {

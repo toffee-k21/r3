@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import urls from "../utils/urls.json";
+const server_url = urls.server_url;
 
 
 const Upload = ({ set }) => {
@@ -11,7 +13,7 @@ const Upload = ({ set }) => {
    console.log(formData)
   
 const handleUpload = async ( ) =>{
-const resp = await fetch("http://localhost:5000/upload/", {
+const resp = await fetch(`http://${server_url}/upload/`, {
   method: "POST",
   body: formData,
   headers: {
