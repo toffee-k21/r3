@@ -20,7 +20,7 @@ const CardContainer = () => {
   // let count = 0;
 
   return (
-    <div className="flex justify-center items-center flex-wrap mt-36 z-20">
+    <div className="flex justify-center items-center flex-wrap mt-36 z-10">
       {ItemsList?.map((r) => {
         return (
           <div className="lg:m-6 mx-1 my-3">

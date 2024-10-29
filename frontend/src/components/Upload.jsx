@@ -13,7 +13,7 @@ const Upload = ({ set }) => {
    console.log(formData)
   
 const handleUpload = async ( ) =>{
-const resp = await fetch(`http://${server_url}/upload/`, {
+const resp = await fetch(`${server_url}/upload/`, {
   method: "POST",
   body: formData,
   headers: {

@@ -16,7 +16,7 @@ const Chat = () => {
 
   const fetchChat = async () => {
     if (Appuser.userId) {
-      const chat = await fetch(`http://${server_url}/chat/${Appuser.userId}`);
+      const chat = await fetch(`${server_url}/chat/${Appuser.userId}`);
       const data = await chat.json();
       // console.log("data", data);
       setChatList(data);

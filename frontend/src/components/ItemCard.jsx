@@ -10,7 +10,7 @@ export default function ItemCard({ details }) {
   const uId = useUserContext();
   return (
     <div>
-      <div className="lg:w-[300px] w-[90%] border-[0.1px] rounded-lg">
+      <div className="lg:w-[300px] w-[250px] border-[0.1px] rounded-lg">
         {imgUrl ? (
           <img
             src={imgUrl}

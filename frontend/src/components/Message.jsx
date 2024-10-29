@@ -80,7 +80,7 @@ const Message = () => {
 
   const fetchMessage = async () => {
     console.log("userId", ID); //  not used uId becaue *at last of the page
-    const result = await fetch(`http://${server_url}/chat/`, {
+    const result = await fetch(`${server_url}/chat/`, {
       method: "post",
       body: JSON.stringify({ from: ID, to: params.id }),
       headers: {
