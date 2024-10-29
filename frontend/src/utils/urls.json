@@ -1,1 +1,1 @@
-{"server_url":"http://localhost:5000","load-balancer-url":"http://localhost:8000"}
+{"server_url":"http://192.168.65.18:5000","load-balancer-url":"http://localhost:8000"}

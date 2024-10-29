@@ -28,8 +28,8 @@ const Chat = () => {
   }, []);
 
   return (
-    <div>
-      <div className="m-36 text-gray-400">
+    <div className="overflow-auto">
+      <div className="lg:m-36 m-2 mt-24 text-gray-400">
         <h1 className="font-bold text-2xl my-8">All your chats</h1>
         {chatList.map((r) => {
           return (
@@ -50,7 +50,7 @@ const Chat = () => {
           );
         })}
       </div>
-      <div className=" absolute top-0 z-[-1] h-[40rem] rounded-md bg-neutral-900 flex flex-col w-full ">
+      <div className="absolute top-0 z-[-1] h-screen lg:h-[40rem] rounded-md bg-neutral-900 flex flex-col w-full">
         <ShootingStars />
         <StarsBackground />
       </div>

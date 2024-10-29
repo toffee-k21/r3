@@ -105,7 +105,7 @@ const Message = () => {
       <div className="mt-28">
         <div
           style={{ scrollbarWidth: "none" }}
-          className="h-[440px] overflow-auto mx-28"
+          className="lg:h-[440px] h-[600px] overflow-auto mx-2 lg:mx-28"
           ref={messageContainerRef}
         >
           {messageData?.map((r) => {
@@ -113,26 +113,26 @@ const Message = () => {
             // console.log(`${r[0]}` == `${ID} `, r[0],ID);
             if (`${r[0]}` == `${ID} `) {
               return (
-                <div className="p-4 my-2 bg-black text-white rounded-md w-[30%] translate-x-[230%]">
+                <div className="p-4 my-2 bg-black text-white rounded-md w-[45%] translate-x-[120%] lg:w-[30%] lg:translate-x-[230%] overflow-hidden">
                   {r[1]}
                 </div>
               );
             } else {
               return (
-                <div className="p-4 my-2 bg-blue-500 text-white rounded-md w-[30%]">
+                <div className="p-4 my-2 bg-blue-500 text-white rounded-md w-[45%] lg:w-[30%]">
                   {r[1]}
                 </div>
               );
             }
           })}
         </div>
-        <div className="w-[90%] bottom-0 mx-16 ">
+        <div className="w-[100%] lg:w-[90%] bottom-0 mx-2 lg:mx-16 ">
           <input
             type="text"
             placeholder="Enter Your Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className=" w-[89%] my-3 p-4 bg-gray-500"
+            className="w-[60%] lg:w-[89%] my-3 p-4 bg-gray-500"
           />
           <button
             className="rounded-md bg-black py-5 px-10 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -141,7 +141,7 @@ const Message = () => {
             send
           </button>
         </div>
-        <div className=" absolute top-0 z-[-10] h-[40rem] rounded-md bg-neutral-900 flex flex-col w-full ">
+        <div className=" absolute top-0 z-[-10] lg:h-[40rem] h-screen rounded-md bg-neutral-900 flex flex-col w-full ">
           <ShootingStars />
           <StarsBackground />
         </div>
