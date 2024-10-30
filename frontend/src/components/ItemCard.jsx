@@ -2,6 +2,7 @@ import React from "react";
 import { BackgroundGradient } from "./ui/background-gradient";
 import { useUserContext } from "../utils/UserContext";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 export default function ItemCard({ details }) {
   const { itemName, desc, priceForDay, location, userId, category, imgUrl } =
@@ -10,7 +11,7 @@ export default function ItemCard({ details }) {
   const uId = useUserContext();
   return (
     <div>
-      <div className="lg:w-[300px] w-[250px] border-[0.1px] rounded-lg">
+      <div className="lg:w-[260px] w-[250px] lg:h-[440px] h-[370px] border-[0.1px] rounded-lg">
         {imgUrl ? (
           <img
             src={imgUrl}
@@ -28,7 +29,7 @@ export default function ItemCard({ details }) {
           <h1 className="inline-flex items-center text-lg font-semibold text-white">
             {itemName}
           </h1>
-          <p className="mt-3 text-sm text-gray-300">{desc}</p>
+          <p className="mt-3 text-sm text-gray-300 overflow-hidden h-[50px]">{desc}</p>
           <div className="mt-4">
             <span className="mb-2 mr-2 inline-block rounded-full bg-gray-100 px-3 py-1 text-[12px] font-semibold text-gray-900">
               #{category}
@@ -38,12 +39,7 @@ export default function ItemCard({ details }) {
             <div></div>
           ) : (
             <Link to={`/reuse/${userId}`}>
-              <button
-                type="button"
-                className="mt-4 w-full rounded-sm bg-black px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              >
-                Use
-              </button>
+            <Button text={"reuse"}/>
             </Link>
           )}
           <p className="text-gray-300 p-2">{userId}</p>

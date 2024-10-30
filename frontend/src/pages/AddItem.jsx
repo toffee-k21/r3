@@ -7,6 +7,7 @@ import HoverBorderGradient from "../components/ui/hover-border-gradient";
 import { useNavigate } from "react-router-dom";
 import useFetchItemList from "../utils/useFetchItemList";
 import urls from "../utils/urls.json";
+import Button from "../components/Button";
 const server_url = urls.server_url;
 // import { Button } from "../components/ui/moving-border";
 //  itemName:String,
@@ -72,7 +73,7 @@ const AddItem = () => {
     <div className="">
       <div className=" lg:mx-28 m-2 ">
         {/* Latitude: {position.latitude}, Longitude: {position.longitude} */}
-        <div className="lg:w-full md:w-1/2 m-4 mt-36">
+        <div className="lg:w-full md:w-1/2 my-4 mt-36">
           <Upload set={setImgUrl} />
           <input
             className="text-white border-white flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 my-4"
@@ -82,7 +83,7 @@ const AddItem = () => {
             onChange={(e) => setItemName(e.target.value)}
           ></input>
         </div>
-        <div className="lg:w-full md:w-1/2 m-4">
+        <div className="lg:w-full md:w-1/2 my-4">
           <input
             className="text-white border-white flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
             type="number"
@@ -91,7 +92,7 @@ const AddItem = () => {
             onChange={(e) => setPriceForDay(e.target.value)}
           ></input>
         </div>
-        <div className="lg:w-full md:w-1/2 m-4">
+        <div className="lg:w-full md:w-1/2 my-4">
           <textarea
             className="text-white border-white flex h-20 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
             //   type=""
@@ -100,7 +101,7 @@ const AddItem = () => {
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
-        <div className="w-full md:w-1/2 m-4">
+        <div className="w-full md:w-1/2 my-4">
           <select onChange={(e) => setCategory(e.target.value)}>
             <option value="electronics">Electronics</option>
             <option value="toy">Toy</option>
@@ -110,14 +111,7 @@ const AddItem = () => {
             <option value="others">Others</option>
           </select>
         </div>
-        <button
-          type="button"
-          className=" m-4 rounded-full bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          onClick={handleAdd}
-        >
-          Add
-        </button>
-
+        <Button text={"Add Item"} onClick={handleAdd} />
         <div>{msg}</div>
       </div>
       <div className="absolute top-0 z-[-1] lg:h-[40rem] h-screen rounded-md bg-neutral-900 flex flex-col w-full ">

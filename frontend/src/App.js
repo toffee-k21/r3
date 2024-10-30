@@ -21,6 +21,7 @@ import Chat from "./components/Chat";
 import Upload from "./components/Upload";
 import Message from "./components/Message";
 import Manage from "./pages/Manage";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
           <Route path="/reuse" element={<Reuse />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/reuse/:id" element={<Message />} />
-          {/* <Route path="/img-detect" element={<ObjectDetection />} /> */}
+          <Route path="/profile" element={<Profile />} />
           <Route path="/upload" element={<Upload />} />
           <Route path = "/manageItem" element = {<Manage />} />
         </Route>

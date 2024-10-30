@@ -41,7 +41,7 @@ const Manage = () => {
   return (
     <>
       <div className="z-10">
-        <h2 className="text-2xl font-semibold lg:mt-10 mt-36 mb-8 lg:mx-10 mx-2 text-white">
+        <h2 className="text-2xl font-semibold mt-36 mb-8 lg:mx-40 mx-6 text-white">
           Edit Product Details
         </h2>
         <div className="flex justify-center items-center flex-wrap">

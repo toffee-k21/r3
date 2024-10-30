@@ -9,7 +9,7 @@ import urls from "../utils/urls.json";
 const server_url = urls.server_url;
 
 const Message = () => {
-    const messageContainerRef = useRef(null);
+  const messageContainerRef = useRef(null);
   const [message, setMessage] = useState("");
   const [messageData, setMessageData] = useState([]);
   // const [err,setErr] = useState(false);
@@ -94,7 +94,7 @@ const Message = () => {
       const { messages } = data;
       setMessageData(messages);
     }catch(err){
-      console.log(err)
+      setMessageData("");
     }
     // console.log("messages", messages);
     // console.log(messageData);
@@ -108,7 +108,7 @@ const Message = () => {
           className="lg:h-[440px] h-[600px] overflow-auto mx-2 lg:mx-28"
           ref={messageContainerRef}
         >
-          {messageData?.map((r) => {
+          {messageData != "" ? (messageData.map((r) => {
             r = r.split(":");
             // console.log(`${r[0]}` == `${ID} `, r[0],ID);
             if (`${r[0]}` == `${ID} `) {
@@ -119,12 +119,12 @@ const Message = () => {
               );
             } else {
               return (
-                <div className="p-4 my-2 bg-blue-500 text-white rounded-md w-[45%] lg:w-[30%]">
+                <div className="p-4 my-2 bg-gradient-to-r  from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)] text-white rounded-md w-[45%] lg:w-[30%]">
                   {r[1]}
                 </div>
               );
             }
-          })}
+          }) ): <div className="text-white text-xl font-semibold">No messages yet</div>}
         </div>
         <div className="w-[100%] lg:w-[90%] bottom-0 mx-2 lg:mx-16 ">
           <input

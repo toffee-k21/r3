@@ -7,24 +7,19 @@ const userRouter = express.Router();
 
 userRouter.post("/signup", async (req, res) => {
 
-  // const check = await User.findOne(req.body.email);//findOne object ya null return krega but find array of objects ya empty array return krega
-  // if (check) {
-  //   res.send("user Already exists");
-  // } else {
     try {
       const data = await User.create({
         userName: req.body.userName,
         email: req.body.email,
         password: req.body.password,
       });
-      // console.log(data);
-      // res.redirect("/");
+
       res.send({result:"successfully created"});
     } catch (error) {
       console.log(error);
     }
   }
-// }
+
 );
 
 userRouter.post("/signin", async(req, res) => {
@@ -32,15 +27,15 @@ userRouter.post("/signin", async(req, res) => {
   if(userVal){
 const token = jwt.sign(req.body, secretkey);
 res.json({result:token, userId:userVal._id});
-// res.setHeader('Token',`bearer ${token}`);
-// res.header = { 'Authentication':`bearer ${token}`}
-// console.log(token);
-// res.setHeader("Content-Type", "application/json");
   } else{
-// console.log("na")
+
   }
-  // res.redirect("/");
 
 });
+
+userRouter.get("/",async (req,res)=>{
+  const userList = await User.find();
+res.send(userList);
+})
 
 module.exports = userRouter;

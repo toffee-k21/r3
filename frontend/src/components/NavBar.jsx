@@ -6,6 +6,7 @@ import { useSocket } from "../utils/SocketContext";
 import useFetchItemList from "../utils/useFetchItemList";
 import Logout from "./Logout";
 import Hamburger from "./Hamburger";
+import Button from "./Button";
 // import {logo} from "../../public/images/logo.png"/
 
 const NavBar = () => {
@@ -26,8 +27,8 @@ const NavBar = () => {
   useFetchItemList();
 
   return authToken ? (
-    <div className="z-20 w-full fixed top-0 bg-gray-800/10">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
+    <div className="z-50 w-full fixed top-0 bg-gray-800/90">
+      <div className="ml-10 flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="flex">
           <div className="inline-flex items-center m-1 z-50">
             <Link to={"/"}>
@@ -65,18 +66,13 @@ const NavBar = () => {
           </div>
         </div>
         <div className="flex z-50">
-          <div className="hidden md:block m-2 text-gray-500">UserId: {uId}</div>
+          <div className="hidden md:block m-2 text-gray-500 bg-black p-2 rounded-md">Id: {uId}</div>
           <div className=" m-2">
             <Link to="/chat">
-              <button
-                type="button"
-                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-gray-500 shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              >
-                Chat
-              </button>
+             <Button text="Chat" className={"mr-10"} />
             </Link>
           </div>
-          <Logout />
+          {/* <Logout /> */}
         </div>
       </div>
       <div className="w-[100%]">

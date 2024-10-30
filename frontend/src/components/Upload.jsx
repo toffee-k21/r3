@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import urls from "../utils/urls.json";
+import Button from './Button';
 const server_url = urls.server_url;
 
 
@@ -35,7 +36,7 @@ set(data.secure_url);
             // enctype="multipart/form-data"
             onChange={(e) => setImg(e.target.files[0])}
           />
-          <button className='bg-black text-white m-2 p-1' onClick={handleUpload} type="submit">Upload</button>
+          <Button className='bg-black text-white m-2 p-1 w-[100px] inline-block' onClick={handleUpload} text={"Upload"}/>
           <div>{msg}</div>
       </div>
     </div>
