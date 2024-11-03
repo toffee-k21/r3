@@ -8,7 +8,7 @@ const SearchUser = () => {
     const [users, setUsers] = useState([]);
  
    const userList = async () => {
-     const val = await fetch(`http://localhost:5000/user/`, {
+     const val = await fetch(`${server_url}/user/`, {
        method: "GET",
        headers: {
          "Content-Type": "application/json",
